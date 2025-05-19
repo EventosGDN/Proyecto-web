@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuenta regresiva</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            padding-top: 50px;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Fondo con palabras flotantes */
+        .floating-words {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .word {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.15);
+            font-weight: bold;
+            opacity: 0;
+            animation-duration: 15s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+        
+        .word1 { animation-name: float1; animation-delay: 0s; font-size: 60px; }
+        .word2 { animation-name: float2; animation-delay: 3s; font-size: 80px; }
+        .word3 { animation-name: float3; animation-delay: 6s; font-size: 70px; }
+        .word4 { animation-name: float4; animation-delay: 9s; font-size: 65px; }
+        .word5 { animation-name: float5; animation-delay: 1s; font-size: 55px; }
+        .word6 { animation-name: float6; animation-delay: 4s; font-size: 85px; }
+        .word7 { animation-name: float7; animation-delay: 7s; font-size: 75px; }
+        .word8 { animation-name: float8; animation-delay: 10s; font-size: 90px; }
+        .word9 { animation-name: float9; animation-delay: 2s; font-size: 50px; }
+        .word10 { animation-name: float10; animation-delay: 5s; font-size: 100px; }
+        
+        @keyframes float1 {
+            0% { left: -300px; top: 10%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: 100%; top: 10%; opacity: 0; }
+        }
+        
+        @keyframes float2 {
+            0% { left: 120%; top: 30%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: -300px; top: 30%; opacity: 0; }
+        }
+        
+        @keyframes float3 {
+            0% { left: -300px; top: 50%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: 120%; top: 50%; opacity: 0; }
+        }
+        
+        @keyframes float4 {
+            0% { left: 120%; top: 70%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: -300px; top: 70%; opacity: 0; }
+        }
+        
+        @keyframes float5 {
+            0% { left: -300px; top: 20%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: 120%; top: 20%; opacity: 0; }
+        }
+        
+        @keyframes float6 {
+            0% { left: 120%; top: 40%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: -300px; top: 40%; opacity: 0; }
+        }
+        
+        @keyframes float7 {
+            0% { left: -300px; top: 60%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: 120%; top: 60%; opacity: 0; }
+        }
+        
+        @keyframes float8 {
+            0% { left: 120%; top: 80%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: -300px; top: 80%; opacity: 0; }
+        }
+        
+        @keyframes float9 {
+            0% { left: -300px; top: 90%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: 120%; top: 90%; opacity: 0; }
+        }
+        
+        @keyframes float10 {
+            0% { left: 120%; top: 5%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: -300px; top: 5%; opacity: 0; }
+        }
+        
+        .scale-word {
+            animation: scaleEffect 3s infinite;
+        }
+        
+        @keyframes scaleEffect {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        #countdown {
+            font-size: 50px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 10;
+        }
+        .time {
+            display: inline-block;
+            margin: 0 5px;
+            text-align: center;
+            width: 110px;
+            height: 110px;
+            background-color: #02d609;
+            color: #000000;
+            border-radius: 15px;
+            line-height: 110px;
+            font-size: 60px;
+            font-weight: 900;
+            /* Agregamos la animación de latido */
+            animation: heartbeat 2s infinite;
+        }
+        
+        /* Keyframes para la animación de latido */
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.1); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.05); }
+            60% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+        
+        .label {
+            display: block;
+            font-size: 20px;
+            color: #ffffff;
+            margin-top: -20px;
+        }
+        .separator {
+            display: inline-block;
+            font-size: 70px;
+            color: #ffffff;
+            vertical-align: middle;
+            margin: 0 -5px;
+            height: 110px;
+            line-height: 90px;
+            position: relative;
+            top: -10px;
+        }
+        .heading {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Animación de ola para "Llega el auténtico" */
+        .wave-text {
+            display: inline-block;
+        }
+        
+        .wave-letter {
+            display: inline-block;
+            animation: waveLetter 2s infinite;
+            animation-timing-function: ease-in-out;
+        }
+        
+        /* Definimos un retraso específico para cada letra */
+        .wave-letter:nth-child(1) { animation-delay: 0.0s; }
+        .wave-letter:nth-child(2) { animation-delay: 0.1s; }
+        .wave-letter:nth-child(3) { animation-delay: 0.2s; }
+        .wave-letter:nth-child(4) { animation-delay: 0.3s; }
+        .wave-letter:nth-child(5) { animation-delay: 0.4s; }
+        .wave-letter:nth-child(6) { animation-delay: 0.5s; }
+        .wave-letter:nth-child(7) { animation-delay: 0.6s; }
+        .wave-letter:nth-child(8) { animation-delay: 0.7s; }
+        .wave-letter:nth-child(9) { animation-delay: 0.8s; }
+        .wave-letter:nth-child(10) { animation-delay: 0.9s; }
+        .wave-letter:nth-child(11) { animation-delay: 1.0s; }
+        .wave-letter:nth-child(12) { animation-delay: 1.1s; }
+        .wave-letter:nth-child(13) { animation-delay: 1.2s; }
+        .wave-letter:nth-child(14) { animation-delay: 1.3s; }
+        .wave-letter:nth-child(15) { animation-delay: 1.4s; }
+        .wave-letter:nth-child(16) { animation-delay: 1.5s; }
+        .wave-letter:nth-child(17) { animation-delay: 1.6s; }
+        .wave-letter:nth-child(18) { animation-delay: 1.7s; }
+        
+        @keyframes waveLetter {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.5); }
+        }
+        .main-title {
+            font-size: 70px;
+            font-weight: bold;
+            /* Añadimos también animación al título principal */
+            animation: titlePulse 2s infinite;
+            position: relative;
+            z-index: 10;
+        }
+        
+        @keyframes titlePulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .main-title span {
+            color: #02d609;
+        }
+        .image-container {
+            margin-top: 40px;
+            position: relative;
+            z-index: 10;
+        }
+        .image-container img {
+            width: 33.33%;
+            max-width: 400px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Fondo con palabras flotantes -->
+    <div class="floating-words">
+        <div class="word word1">2x1</div>
+        <div class="word word2">50% OFF</div>
+        <div class="word word3">DESCUENTOS</div>
+        <div class="word word4">OFERTAS</div>
+        <div class="word word5">3x2</div>
+        <div class="word word6 scale-word">70%</div>
+        <div class="word word7">4x2</div>
+        <div class="word word8">2do al 80%</div>
+        <div class="word word9">AHORRA</div>
+        <div class="word word10 scale-word">SÚPER OFERTAS</div>
+    </div>
+
+    <div class="heading wave-text">
+        <span class="wave-letter">L</span>
+        <span class="wave-letter">l</span>
+        <span class="wave-letter">e</span>
+        <span class="wave-letter">g</span>
+        <span class="wave-letter">a</span>
+        <span class="wave-letter"> </span>
+        <span class="wave-letter">e</span>
+        <span class="wave-letter">l</span>
+        <span class="wave-letter"> </span>
+        <span class="wave-letter">a</span>
+        <span class="wave-letter">u</span>
+        <span class="wave-letter">t</span>
+        <span class="wave-letter">é</span>
+        <span class="wave-letter">n</span>
+        <span class="wave-letter">t</span>
+        <span class="wave-letter">i</span>
+        <span class="wave-letter">c</span>
+        <span class="wave-letter">o</span>
+    </div>
+    <div class="main-title">Black <span>Friday</span></div>
+
+    <div id="countdown">
+        <div class="time">
+            <span id="days">00</span>
+            <div class="label">Días</div>
+        </div>
+        <span class="separator">:</span>
+        <div class="time">
+            <span id="hours">00</span>
+            <div class="label">Horas</div>
+        </div>
+        <span class="separator">:</span>
+        <div class="time">
+            <span id="minutes">00</span>
+            <div class="label">Minutos</div>
+        </div>
+        <span class="separator">:</span>
+        <div class="time">
+            <span id="seconds">00</span>
+            <div class="label">Segundos</div>
+        </div>
+    </div>
+
+    <div class="image-container">
+        <img src="logo-web_nuevo.png" alt="Descripción de la imagen">
+    </div>
+
+    <script>
+        // Fecha y hora del evento (31/10/2025 a las 08:00)
+        var eventDate = new Date("Oct 31, 2025 08:00:00").getTime();
+
+        // Actualizar la cuenta regresiva cada 1 segundo
+        var countdown = setInterval(function() {
+
+            // Obtener la fecha y hora actual
+            var now = new Date().getTime();
+
+            // Calcular la diferencia entre la fecha del evento y la fecha actual
+            var distance = eventDate - now;
+
+            // Calcular días, horas, minutos y segundos
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Formatear números a dos dígitos
+            document.getElementById("days").innerHTML = String(days).padStart(2, '0');
+            document.getElementById("hours").innerHTML = String(hours).padStart(2, '0');
+            document.getElementById("minutes").innerHTML = String(minutes).padStart(2, '0');
+            document.getElementById("seconds").innerHTML = String(seconds).padStart(2, '0');
+
+            // Si la cuenta regresiva ha terminado, mostrar un mensaje
+            if (distance < 0) {
+                clearInterval(countdown);
+                document.getElementById("countdown").innerHTML = "¡Evento Comenzado!";
+            }
+        }, 1000);
+    </script>
+
+</body>
+</html>
